@@ -10,6 +10,6 @@ output_sum=$(bitcoin-cli -signet getrawtransaction $tx true | jq '[.vout[].value
 
 fee=$(echo "$vin_value - $output_sum" | bc)
 
-fee_sats=$(echo "$fee * 100000000" | bc)
+fee_sats=$(echo "$fee * 100000000" | bc | awk '{printf "%d", $1}')
 
 echo $fee_sats
